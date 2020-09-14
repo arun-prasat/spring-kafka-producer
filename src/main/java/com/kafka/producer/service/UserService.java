@@ -30,8 +30,11 @@ public class UserService {
     }
 
     public User put(User user) {
-        dynamoDBUserRepo.save(user);
-        return repository.save(user);
+        if(!dynamoDBUserRepo.existsById(user.getId())) {
+            dynamoDBUserRepo.save(user);
+            return repository.save(user);
+        }
+        return user;
     }
 
     public void removeFromCache(String id) {
