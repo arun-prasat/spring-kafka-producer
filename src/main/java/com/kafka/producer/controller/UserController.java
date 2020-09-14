@@ -49,4 +49,10 @@ public class UserController {
         userService.removeFromCache(id);
         return new ResponseEntity<>("deleted Successfully", HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable String id) {
+        String msg = userService.delete(id);
+        return new ResponseEntity<>(msg, HttpStatus.OK);
+    }
 }

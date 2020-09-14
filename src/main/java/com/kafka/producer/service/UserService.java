@@ -37,4 +37,14 @@ public class UserService {
     public void removeFromCache(String id) {
         repository.remove(id);
     }
+
+    public String delete(String id) {
+        String msg = "data not found for id-"+id;
+        if(dynamoDBUserRepo.existsById(id)) {
+            repository.remove(id);
+            dynamoDBUserRepo.deleteById(id);
+            msg = "removed successfully";
+        }
+        return msg;
+    }
 }
